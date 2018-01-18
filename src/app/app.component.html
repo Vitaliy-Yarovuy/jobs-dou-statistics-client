@@ -1,16 +1,26 @@
+
+<nav class="navbar navbar-dark bg-dark fixed-top">
+  <div class="container justify-content-start">
+    <a class="navbar-brand" href="/">JOBS-DOU-GRABBER</a>
+    <form class="form-inline ">
+      <button class="btn btn-outline-success mx-2" type="button" (click)="initGrab()" [disabled]="categories.length">INIT </button>
+      <button class="btn btn-outline-success mx-2" type="button" (click)="grab()" [disabled]="!categories.length">GRABB</button>
+  </form>
+  </div>
+</nav>
+
 <main role="main" class="container">
   <div class="jumbotron">
     <h1>Hello, User!</h1>
     <p>add basic descriptions later ...</p>
   </div>
 
-  <button class="btn btn-primary" (click)="initGrab()">Init grab</button>
 
 
   <div class="row">
     <div class="col-sm" *ngIf="categories.length">
       <h3>Categories</h3>
-      <table class="table">
+      <table class="table table-sm">
         <thead>
         <tr>
           <th scope="col">#</th>
@@ -27,7 +37,7 @@
     </div>
     <div class="col-sm" *ngIf="companies.length">
       <h3>Companies</h3>
-      <table class="table">
+      <table class="table table-sm">
         <thead>
         <tr>
           <th scope="col">#</th>
@@ -49,6 +59,10 @@
 
 
 
-
-
 </main>
+
+<div class="modal fade show progress-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" *ngIf="loading" >
+  <div class="modal-dialog modal-dialog-centered justify-content-center ">
+      <div class="loader"></div>
+  </div>
+</div>
