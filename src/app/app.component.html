@@ -4,7 +4,7 @@
     <a class="navbar-brand" href="/">JOBS-DOU-GRABBER</a>
     <form class="form-inline ">
       <button class="btn btn-outline-success mx-2" type="button" (click)="initGrab()" [disabled]="categories.length">INIT </button>
-      <button class="btn btn-outline-success mx-2" type="button" (click)="grab()" [disabled]="!categories.length">GRABB</button>
+      <button class="btn btn-outline-success mx-2" type="button" (click)="grab()" [disabled]="!categories.length && !vacanciesGrabbed">GRABB</button>
   </form>
   </div>
 </nav>
@@ -14,7 +14,6 @@
     <h1>Hello, User!</h1>
     <p>add basic descriptions later ...</p>
   </div>
-
 
 
   <div class="row">
@@ -30,7 +29,7 @@
         <tbody>
         <tr *ngFor="let category of categories; let i = index">
           <td>{{i}}</td>
-          <td>{{category}}</td>
+          <td>{{category.name}}</td>
         </tr>
         </tbody>
       </table>
@@ -57,6 +56,28 @@
   </div>
 
 
+
+  <ngb-tabset *ngIf="vacanciesGrabbed">
+    <ngb-tab *ngFor="let category of categories" >
+      <ng-template ngbTabTitle>{{category.name}} ({{category.vacancies.length}})</ng-template>
+      <ng-template ngbTabContent>
+        <table class="table table-sm">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" *ngFor="let field of vacanciesFields">{{field}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let vacancy of category.vacancies; let i = index">
+            <td>{{i}}</td>
+            <td *ngFor="let field of vacanciesFields" [title]="vacancy[field]">{{cutDown(vacancy[field])}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
 
 
 </main>
